@@ -1,11 +1,16 @@
 import { type } from "@testing-library/user-event/dist/type";
 import React from "react";
+import { useQuiz } from "../contexts/QuizContext";
 
-export default function NextButton({ dispatch, answer, index, numQuestions }) {
+export default function NextButton() {
+  const { dispatch, answer, index, numQuestions } = useQuiz();
   if (answer === null) return null;
   if (index < numQuestions - 1) {
     return (
-      <button className="btn btn-ui" onClick={() => dispatch({ type: "nextQuestion" })}>
+      <button
+        className="btn btn-ui"
+        onClick={() => dispatch({ type: "nextQuestion" })}
+      >
         Next
       </button>
     );
@@ -13,7 +18,10 @@ export default function NextButton({ dispatch, answer, index, numQuestions }) {
 
   if (index === numQuestions - 1) {
     return (
-      <button className="btn btn-ui" onClick={() => dispatch({ type: "finish" })}>
+      <button
+        className="btn btn-ui"
+        onClick={() => dispatch({ type: "finish" })}
+      >
         Finish
       </button>
     );

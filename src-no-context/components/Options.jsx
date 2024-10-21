@@ -1,9 +1,7 @@
 import { type } from "@testing-library/user-event/dist/type";
 import React from "react";
-import { useQuiz } from "../contexts/QuizContext";
 
-export default function Options({ question }) {
-  const { answer, dispatch } = useQuiz();
+export default function Options({ question, answer, dispatch }) {
   const hasAnswered = answer !== null;
 
   return (
@@ -12,11 +10,7 @@ export default function Options({ question }) {
         <button
           key={option}
           className={`btn btn-option ${index === answer ? "answer" : ""} ${
-            hasAnswered
-              ? index === question.correctOption
-                ? "correct"
-                : "wrong"
-              : ""
+            hasAnswered ? (index === question.correctOption ? "correct" : "wrong") : ""
           }`}
           onClick={() => dispatch({ type: "newAnswer", payload: index })}
           disabled={hasAnswered}
